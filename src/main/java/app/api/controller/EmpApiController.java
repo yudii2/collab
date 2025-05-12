@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @Slf4j
 @RequestMapping("/api/emp")
-@Transactional
 public class EmpApiController {
 
 	private final EmpRepository empRepository;
@@ -30,6 +29,7 @@ public class EmpApiController {
 		return "emp api controller";
 	}
 
+	@Transactional
 	@PutMapping("/{empno}")
 	public UpdateEmpReponse updateEmp(@PathVariable("empno") Integer empno,
 														@RequestBody UpdateEmpRequest updateReq) {

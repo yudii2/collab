@@ -209,6 +209,7 @@ replay_pid*
 # End of https://www.toptal.com/developers/gitignore/api/intellij,eclipse,java
 
 
+
 # Created by https://www.toptal.com/developers/gitignore/api/macos
 # Edit at https://www.toptal.com/developers/gitignore?templates=macos
 
@@ -246,3 +247,8 @@ Temporary Items
 *.icloud
 
 # End of https://www.toptal.com/developers/gitignore/api/macos
+
+
+### db ###
+src/main/resources/application-local.properties
+

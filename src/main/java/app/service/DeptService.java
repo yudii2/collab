@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import app.entity.Dept;
 import app.repository.DeptRepository;
+import app.util.ApiException;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -18,7 +19,13 @@ public class DeptService {
 
 	@Transactional
 	public List<Dept> getDepts() {
-		return deptRepository.findAll();
+		final List<Dept> depts = deptRepository.findAll();
+		
+		if (depts.isEmpty()) {
+			throw new ApiException("사원정보가 존재하지 않습니다");
+			
+		}
+		return depts;
 	}
 	
 	@Transactional

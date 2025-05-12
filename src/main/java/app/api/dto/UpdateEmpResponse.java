@@ -2,10 +2,6 @@ package app.api.dto;
 
 import app.entity.Dept;
 import app.entity.Emp;
-import jakarta.persistence.Column;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -13,7 +9,7 @@ import java.time.LocalDate;
 
 @Getter
 @Setter
-public class UpdateEmpReponse {
+public class UpdateEmpResponse {
 
     private Integer empno;
 
@@ -31,37 +27,31 @@ public class UpdateEmpReponse {
 
     private Integer deptno;
 
-    public UpdateEmpReponse(Emp findEmp) {
-        this.empno = findEmp.getEmpno();
-        this.ename = findEmp.getEname();
-        this.job = findEmp.getJob();
-        this.mgr = findEmp.getMgr();
-        this.hiredate = findEmp.getHiredate();
-        this.sal = findEmp.getSal();
-        this.comm = findEmp.getComm();
-        this.deptno = findEmp.getDept().getDeptno();
+    private UpdateEmpResponse(Integer empno, String ename, String job, Integer mgr, LocalDate hiredate, Double sal, Double comm, Integer deptno) {
+        this.empno = empno;
+        this.ename = ename;
+        this.job = job;
+        this.mgr = mgr;
+        this.hiredate = hiredate;
+        this.sal = sal;
+        this.comm = comm;
+        this.deptno = deptno;
     }
 
+    public static UpdateEmpResponse of(Integer empno, String ename, String job, Integer mgr,
+                                       LocalDate hiredate, Double sal, Double comm, Integer deptno) {
+        return new UpdateEmpResponse(empno, ename, job, mgr, hiredate, sal, comm, deptno);
+    }
 
-    public class UpdateEmpResponse {
-        private Integer empno;
-        private String ename;
-        private String job;
-        private Integer mgr;
-        private LocalDate hiredate;
-        private Double sal;
-        private Double comm;
-        private Integer deptno;
-
-        public UpdateEmpResponse(Emp emp) {
-            this.empno = emp.getEmpno();
-            this.ename = emp.getEname();
-            this.job = emp.getJob();
-            this.mgr = emp.getMgr();
-            this.hiredate = emp.getHiredate();
-            this.sal = emp.getSal();
-            this.comm = emp.getComm();
-            this.deptno = emp.getDept().getDeptno();
-        }
+    public static UpdateEmpResponse from(Emp emp, Dept dept) {
+        return UpdateEmpResponse.of(emp.getEmpno(),
+                emp.getEname(),
+                emp.getJob(),
+                emp.getMgr(),
+                emp.getHiredate(),
+                emp.getSal(),
+                emp.getComm(),
+                dept.getDeptno()
+        );
     }
 }

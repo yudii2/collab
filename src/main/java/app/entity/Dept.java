@@ -1,13 +1,14 @@
 package app.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -25,5 +26,8 @@ public class Dept {
 	
 	@Column(name = "loc")
 	private String loc;
+
+	@OneToMany(mappedBy = "dept", cascade = CascadeType.ALL)
+	private List<Emp> emps = new ArrayList<>();
 	
 }

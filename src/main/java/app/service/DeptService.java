@@ -18,7 +18,8 @@ public class DeptService {
 
 	@Transactional
 	public List<Dept> getDepts() {
-		return deptRepository.findAll();
+		final List<Dept> depts = deptRepository.findAll();	
+		return depts;
 	}
 	
 	@Transactional
